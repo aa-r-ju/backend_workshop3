@@ -1,0 +1,15 @@
+{
+  "name": "backend_workshop3",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Aarju",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
