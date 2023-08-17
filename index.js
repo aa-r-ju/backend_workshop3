@@ -27,6 +27,17 @@ let notes = [
   //   response.end(JSON.stringify(notes))
   // })
 
+
+  const requestLogger = (request, response, next) => {
+    console.log('Method:', request.method)
+    console.log('Path:  ', request.path)
+    console.log('Body:  ', request.body)
+    console.log('---')
+    next()
+  }
+  app.use(requestLogger)
+
+  
   app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
   })
@@ -61,14 +72,9 @@ let notes = [
         : 0
       return maxId + 1
     }
-    console.log(generateId())
 
     app.post('/api/notes', (request, response) => {
-
-
-      
-        
-      const note = request.body
+       const note = request.body
       if (!note.content) {
         return response.status(400).json({ 
           error: 'content missing' 
@@ -85,6 +91,14 @@ let notes = [
     
       response.json(note1)
          })
+
+         const unknownEndpoint = (request, response) => {
+          response.status(404).send({ error: 'unknown endpoint' })
+        }
+        
+        app.use(unknownEndpoint)
+      
+
 
 
 const PORT = 3001
