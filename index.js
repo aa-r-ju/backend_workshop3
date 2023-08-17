@@ -55,11 +55,18 @@ let notes = [
     })
 
 
-    app.post('/api/notes', (request, response) => {
+    const generateId = () => {
       const maxId = notes.length > 0
-        ? Math.max(...notes.map(n => n.id)) 
+        ? Math.max(...notes.map(n => n.id))
         : 0
-    
+      return maxId + 1
+    }
+    console.log(generateId())
+
+    app.post('/api/notes', (request, response) => {
+
+
+      
         
       const note = request.body
       if (!note.content) {
@@ -67,12 +74,16 @@ let notes = [
           error: 'content missing' 
         })
       }
+       
+      const note1 = {
+        content: note.content,
+        important: note.important || false,
+        id: generateId()
+      }
+
+      notes = notes.concat(note1)
     
-      note.id = maxId + 1
-    
-      notes = notes.concat(note)
-    
-      response.json(note)
+      response.json(note1)
          })
 
 
