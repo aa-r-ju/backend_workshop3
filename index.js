@@ -38,8 +38,12 @@ let notes = [
    
     const note = notes.find(note => note.id === id)
     
-    response.json(note).response.status(200)
-  })
+    if (note) {
+      response.json(note)
+    } else {
+      response.status(404).end()
+    }
+    })
 
 const PORT = 3001
 app.listen(PORT)
