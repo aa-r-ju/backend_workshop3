@@ -37,8 +37,8 @@ let notes = [
     const id = Number(request.params.id)
    
     const note = notes.find(note => note.id === id)
-    console.log(note,"mango")
-    response.json(note)
+    
+    response.json(note).response.status(200)
   })
 
 const PORT = 3001
