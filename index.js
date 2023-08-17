@@ -2,6 +2,8 @@ const http = require('http')
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 
 let notes = [
     {
@@ -51,6 +53,15 @@ let notes = [
     
       response.status(204).end()
     })
+
+
+    app.post('/api/notes', (request, response) => {
+      console.log(request,"aa")
+      const note = request.body
+      console.log(note)
+      response.json(note)
+    })
+
 
 const PORT = 3001
 app.listen(PORT)
